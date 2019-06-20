@@ -8,7 +8,6 @@ $(document).ready(function() {
     var intervalID;
 
     var radioInputs = $(":radio");
-    // console.log(radioInputs[0].value);
 
     function startGame() {
         clearInterval(intervalID);
@@ -17,7 +16,7 @@ $(document).ready(function() {
 
     function decrement() {
         timeCount--;
-        $("#time-remaining").text("Time remaining: " + timeCount);
+        $("#time-remaining").text("Time remaining: " + timeCount + " s");
         if (timeCount === 0) {
           calculateScore();
         };
@@ -25,6 +24,7 @@ $(document).ready(function() {
 
     function calculateScore() {
         clearInterval(intervalID);
+        $("#submit-button").css("visibility", "hidden");
 
         for (var i = 0; i < radioInputs.length; i++) {
             if (radioInputs[i].checked === true) {
@@ -37,16 +37,20 @@ $(document).ready(function() {
             };
         };
 
-        alert("All done! You answered " + correctCount + " questions correctly, " + incorrectCount + 
-            " questions incorrectly, and you did not answer " + unansweredCount + " questions.");
+        alert("All done! You answered " + correctCount + " question(s) correctly, " + incorrectCount + 
+            " question(s) incorrectly, and you did not answer " + unansweredCount + " question(s).");
     };
-    
-    $(".btn").on("click", function() {
-        // preventDefault();
-        calculateScore();
+
+    $("#start-button").on("click", function() {
+        $(".container").css("visibility", "visible");
+        $(this).css("visibility", "hidden");
+        startGame();
     });
     
-    // startGame();
+    $("#submit-button").on("click", function(event) {
+        event.preventDefault();
+        calculateScore();
+    });
 
 });
 

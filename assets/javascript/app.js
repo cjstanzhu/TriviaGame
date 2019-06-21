@@ -4,7 +4,7 @@ $(document).ready(function() {
     var incorrectCount = 0;
     var unansweredCount = 5;
 
-    var timeCount = 25;
+    var timeCount = 60;
     var intervalID;
 
     var radioInputs = $(":radio");
